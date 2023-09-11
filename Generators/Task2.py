@@ -16,9 +16,12 @@ t = """Генератор – это итератор, элементы кото
 
 
 def boldText(text: str):
-    text.replace("\n", '')
     for i in text.split(' '):
-        yield i.upper()
+        if "\n" in i:
+            yield i.upper(), "\n"
+            continue
+        yield i.upper(), ' '
 
-for i in boldText(t):
-    print(i)
+
+for word, endpoint in boldText(t):
+    print(word, end=endpoint)
